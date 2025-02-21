@@ -4,7 +4,9 @@
 64k - One-time pad encryption and decryption tool
 
 ## SYNOPSIS
-64k -g <pad_file> 64k -e <input_file> <pad_file> <output_file> 64k -d <input_file> <pad_file> <output_file>
+64k -g <pad_file> 
+64k -e <input_file> <pad_file> <output_file> 
+64k -d <input_file> <pad_file> <output_file>
 
 ## DESCRIPTION
 The `64k` program provides secure encryption and decryption using a **one-time pad**. It ensures perfect secrecy when used correctly.
