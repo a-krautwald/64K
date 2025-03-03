@@ -45,5 +45,9 @@ This command decrypts `encrypted.txt` using `pad.txt` and saves the result in `d
 - `0` - Success
 - `1` - Error (e.g., file issues, invalid arguments)
 
+# SECURE DELETE PLAINTEXT
+
+`shred -u <input_file>`
+
 ## AUTHOR
 Written by A. Krautwald
