@@ -1,53 +1,82 @@
-# 64K Encryption Tool Manual
+# 64K OTP Tool
 
-## NAME
-64k - One-time pad encryption and decryption tool
+A secure One-Time Pad (OTP) implementation in C using OpenSSL for cryptographic operations.
 
-## SYNOPSIS
-64k -g <pad_file> 
-64k -e <input_file> <pad_file> <output_file> 
-64k -d <input_file> <pad_file> <output_file>
+## Features
 
-## DESCRIPTION
-The `64k` program provides secure encryption and decryption using a **one-time pad**. It ensures perfect secrecy when used correctly.
+- Cryptographically secure random number generation using OpenSSL
+- Efficient file processing with buffer-based operations
+- Secure memory handling with explicit memory wiping
+- File integrity verification using SHA-256
+- Binary mode file operations for consistent data handling
+- Comprehensive error handling and resource cleanup
 
-### COMMANDS
-- `-g <pad_file>`
-  - Generates a 64 KB one-time pad file containing random printable ASCII characters.
-- `-e <input_file> <pad_file> <output_file>`
-  - Encrypts `input_file` using `pad_file` and writes the encrypted output to `output_file`.
-- `-d <input_file> <pad_file> <output_file>`
-  - Decrypts `input_file` using `pad_file` and writes the decrypted output to `output_file`.
+## Security Features
 
-## USAGE EXAMPLES
+- Minimum pad size requirement (1024 bytes)
+- Secure memory wiping to prevent data persistence
+- Binary mode file operations to prevent text mode issues
+- Proper resource cleanup in all error cases
+- Buffer overflow protection
+- File integrity verification capability
 
-### Generate a one-time pad
-./64k -g pad.txt
+## Requirements
 
-This command creates a 64 KB file `pad.txt` containing random ASCII characters.
+- C compiler (gcc recommended)
+- OpenSSL development libraries
+- POSIX-compliant operating system
 
-### Encrypt a message
-./64k -e message.txt pad.txt encrypted.txt
+## Installation
 
-This command encrypts `message.txt` using `pad.txt` and saves the result in `encrypted.txt`.
+1. Install OpenSSL development libraries:
+   - On Ubuntu/Debian: `sudo apt-get install libssl-dev`
+   - On macOS: `brew install openssl`
+   - On Windows: Download from [OpenSSL website](https://www.openssl.org/source/)
 
-### Decrypt a message
-./64k -d encrypted.txt pad.txt decrypted.txt
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/64k-otp.git
+   cd 64k-otp
+   ```
 
-This command decrypts `encrypted.txt` using `pad.txt` and saves the result in `decrypted.txt`.
+3. Compile the program:
+   ```bash
+   gcc -o 64k 64k.c -lssl -lcrypto
+   ```
 
-## NOTES
-- The pad must be at least as long as the message.
-- The same pad must never be reused for multiple encryptions.
-- The pad and encrypted message should be securely stored and transmitted.
+## Usage
 
-## EXIT STATUS
-- `0` - Success
-- `1` - Error (e.g., file issues, invalid arguments)
+### Generate a new one-time pad
+```bash
+./64k -g <pad_file>
+```
 
-# SECURE DELETE PLAINTEXT
+### Encrypt a file
+```bash
+./64k -e <input_file> <pad_file> <output_file>
+```
 
-`shred -u <input_file>`
+### Decrypt a file
+```bash
+./64k -d <input_file> <pad_file> <output_file>
+```
 
-## AUTHOR
-Written by A. Krautwald
+## Security Considerations
+
+1. Never reuse a one-time pad
+2. Store the pad file securely
+3. Use a secure method to transfer the pad file to the recipient
+4. Delete the pad file after use
+5. Implement proper access controls on the pad file
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Disclaimer
+
+This tool is provided for educational and research purposes only. Users are responsible for ensuring proper security practices when using this tool.
